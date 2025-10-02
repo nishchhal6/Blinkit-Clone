@@ -7,6 +7,7 @@ import { products } from "../data/mockData"; // products ko import karein
 
 const HomePage = () => {
   // Alag-alag categories ke liye products ko filter karein
+  const VegetablesFruitsProducts = products.filter((p) => p.categoryId === 1);
   const dairyProducts = products.filter((p) => p.categoryId === 2);
   const munchiesProducts = products.filter((p) => p.categoryId === 3);
 
@@ -26,6 +27,11 @@ const HomePage = () => {
         title="Munchies"
         products={munchiesProducts}
         categoryId={3}
+      />
+      <ProductsPreview
+        title="Vegetables & Fruits"
+        products={VegetablesFruitsProducts}
+        categoryId={1}
       />
 
       {/* Aap yahan aur bhi categories add kar sakte hain */}

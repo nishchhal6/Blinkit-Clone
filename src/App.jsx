@@ -5,8 +5,8 @@ import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import ProductsPage from "./pages/ProductsPage";
 import AnimatedLayout from "./components/layout/AnimatedLayout";
-import CategoryPage from "./pages/CategoryPage";
-import AllCategoriesPage from "./pages/AllCategoriesPage";
+import MyAccountPage from "./pages/MyAccountPage";
+import AllCategoriesPage from "./pages/AllCategoriesPage"; // 1. AllCategoriesPage ko import karein
 
 function App() {
   return (
@@ -16,7 +16,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/products/:categoryId" element={<ProductsPage />} />
-          <Route path="/products/:categoryId" element={<CategoryPage />} />
+          <Route path="/account" element={<MyAccountPage />} />
+
+          {/* 2. Naya route yahan add karein */}
           <Route path="/categories" element={<AllCategoriesPage />} />
         </Routes>
       </AnimatedLayout>

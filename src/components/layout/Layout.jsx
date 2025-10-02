@@ -1,15 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
-
-// We'll add a Footer component later
-// import Footer from './Footer';
+import LoginModal from "../ui/LoginModal";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+
+  const openLoginModal = () => setIsLoginModalOpen(true);
+
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <Header />
+    <div className="flex flex-col min-h-screen font-sans">
+      <Header onLoginClick={openLoginModal} />
+
       <main className="flex-grow">{children}</main>
-      {/* <Footer /> */}
+      <LoginModal isOpen={isLoginModalOpen} onClose={closeLoginModal} />
+      <Footer />
     </div>
   );
 };

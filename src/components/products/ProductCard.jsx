@@ -10,7 +10,7 @@ const ProductCard = ({ product }) => {
   return (
     <motion.div
       // Compact, fixed width card
-      className="bg-white border border-gray-200 rounded-lg flex flex-col w-40 md:w-44 flex-shrink-0"
+      className="bg-white border border-gray-200 rounded-2xl flex flex-col w-40 md:w-44 flex-shrink-0"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, amount: 0.5 }}
@@ -18,7 +18,7 @@ const ProductCard = ({ product }) => {
     >
       {/* Image with Padding */}
       <div className="p-2">
-        <div className="relative w-full aspect-square overflow-hidden rounded-md">
+        <div className="relative w-full aspect-square overflow-hidden rounded-xl">
           <img
             src={product.image}
             alt={product.name}
@@ -32,11 +32,11 @@ const ProductCard = ({ product }) => {
         {/* Delivery Time */}
         <div className="flex items-center gap-1 text-xs text-gray-500">
           <FiClock />
-          <span>17 MINS</span>
+          <span>0-10 MINS</span>
         </div>
 
         {/* Product Name */}
-        <h3 className="text-sm font-bold text-gray-900 mt-1 h-10 overflow-hidden">
+        <h3 className="text-sm font-bold text-gray-900 mt-1 overflow-hidden">
           {product.name}
         </h3>
 
@@ -46,7 +46,7 @@ const ProductCard = ({ product }) => {
         </p>
 
         {/* Price and Add Button */}
-        <div className="flex justify-between items-center mt-3">
+        <div className="flex justify-between items-center mt-2">
           <p className="text-base font-bold text-gray-900">₹{product.price}</p>
 
           {quantity === 0 ? (

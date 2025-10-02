@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import { useUser } from "../../context/UserContext"; // 2. User context import kiya
+import AccountDropdown from "../ui/AccountDropdown";
 import {
   FiShoppingCart,
   FiChevronDown,
@@ -8,7 +10,9 @@ import {
   FiMapPin,
 } from "react-icons/fi";
 
-const Header = () => {
+const Header = ({ onLoginClick }) => {
+  const { isLoggedIn } = useUser();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { cartItems } = useCart();
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cartItems.reduce(
@@ -105,14 +109,37 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Right Section: Login and Cart */}
-            <div className="flex items-center space-x-6">
-              <a
-                href="#"
-                className="hidden sm:block text-base font-medium text-gray-700 hover:text-yellow-500"
-              >
-                Login
-              </a>
+            <div className="flex items-center gap-6">
+              {/* --- YAHAN HAI ASLI MAGIC --- */}
+              {isLoggedIn ? (
+                // Agar user logged in hai, toh "Account" dropdown dikhao
+                <div
+                  className="relative"
+                  onMouseLeave={() => setIsDropdownOpen(false)}
+                >
+                  <button
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    onMouseEnter={() => setIsDropdownOpen(true)}
+                    className="flex items-center gap-1 text-base font-semibold text-gray-700"
+                  >
+                    Account
+                    <FiChevronDown
+                      className={`transition-transform duration-200 ${
+                        isDropdownOpen ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                  {isDropdownOpen && <AccountDropdown />}
+                </div>
+              ) : (
+                // Agar logged in nahi hai, toh "Login" button dikhao
+                <button
+                  onClick={onLoginClick}
+                  className="text-base font-semibold text-gray-700 hover:text-green-600"
+                >
+                  Login
+                </button>
+              )}
               <Link
                 to="/cart"
                 className="flex items-center bg-green-600 text-white font-bold py-3 px-4 rounded-xl shadow-md hover:bg-green-700 transition-all transform active:scale-95"

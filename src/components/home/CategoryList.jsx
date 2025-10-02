@@ -13,7 +13,7 @@ const CategoryList = () => {
           <h2 className="text-xl font-bold text-gray-800">Shop by Category</h2>
           <Link
             to="/categories"
-            className="text-lg font-semibold text-green-600 hover:underline"
+            className="px-2 py-1 m-0 rounded-md bg-green-600 hover:bg-green-800 text-md font-semibold text-white"
           >
             See all
           </Link>
@@ -33,14 +33,14 @@ const CategoryList = () => {
                 to={`/products/${category.id}`}
                 className="group flex flex-col items-center text-center space-y-2"
               >
-                <div className="w-20 h-20 sm:w-24 sm:h-24 p-1 border-4 border-transparent group-hover:border-green-600 rounded-full transition-all">
+                <div className="w-20 h-20 sm:w-28 sm:h-28 p-1 border-4 border-transparent group-hover:border-green-600 rounded-full transition-all">
                   <img
                     src={category.image}
                     alt={category.name}
                     className="w-full h-full object-cover rounded-full shadow-sm"
                   />
                 </div>
-                <h3 className="text-sm font-medium text-gray-700 group-hover:text-green-600 transition-colors">
+                <h3 className="text-sm font-medium text-gray-700 group-hover:text-green-700 transition-colors">
                   {category.name}
                 </h3>
               </Link>
