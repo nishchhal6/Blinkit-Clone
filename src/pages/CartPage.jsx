@@ -1,6 +1,6 @@
 import React from "react";
 import { useCart } from "../context/CartContext";
-import { FiPlus, FiMinus, FiTrash2 } from "react-icons/fi";
+import { FiPlus, FiMinus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
@@ -14,10 +14,10 @@ const CartPage = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="text-center py-20">
+      <div className="text-center py-20 px-4">
         <h1 className="text-3xl font-bold text-gray-800">Your Cart is Empty</h1>
         <p className="text-gray-500 mt-2">
-          Looks like you haven't added anything to your cart yet.
+          Looks like you haven&apos;t added anything to your cart yet.
         </p>
         <Link
           to="/"
@@ -34,34 +34,37 @@ const CartPage = () => {
       <h1 className="text-2xl md:text-3xl font-bold mb-6">
         Shopping Cart ({totalItems} {totalItems > 1 ? "items" : "item"})
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Cart Items List */}
-        <div className="md:col-span-2 space-y-4">
+        <div className="lg:col-span-2 space-y-4">
           {cartItems.map((item) => (
+            // Responsive Change: Added flex-col and sm:flex-row to stack on mobile
             <div
               key={item.id}
-              className="flex items-center bg-white p-4 border border-gray-200 rounded-lg shadow-sm"
+              className="flex flex-col sm:flex-row items-center bg-white p-4 border border-gray-200 rounded-lg shadow-sm text-center sm:text-left"
             >
               <img
                 src={item.image}
                 alt={item.name}
-                className="w-20 h-20 object-cover rounded-md"
+                className="w-24 h-24 sm:w-20 sm:h-20 object-cover rounded-md"
               />
-              <div className="ml-4 flex-grow">
+              <div className="mt-4 sm:mt-0 sm:ml-4 flex-grow">
                 <h3 className="font-semibold text-lg">{item.name}</h3>
-                <p className="text-gray-600 font-bold">₹{item.price}</p>
+                <p className="text-gray-600 font-bold">
+                  ₹{item.price.toFixed(2)}
+                </p>
               </div>
-              <div className="flex items-center justify-center bg-gray-100 text-black rounded-lg font-bold shadow-sm">
+              <div className="mt-4 sm:mt-0 flex items-center justify-center bg-gray-100 text-black rounded-lg font-bold shadow-sm">
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="p-2 transition-transform active:scale-90"
+                  className="p-3 sm:p-2 transition-transform active:scale-90"
                 >
                   <FiMinus size={16} />
                 </button>
-                <span className="px-3 text-sm">{item.quantity}</span>
+                <span className="px-4 sm:px-3 text-sm">{item.quantity}</span>
                 <button
                   onClick={() => addToCart(item)}
-                  className="p-2 transition-transform active:scale-90"
+                  className="p-3 sm:p-2 transition-transform active:scale-90"
                 >
                   <FiPlus size={16} />
                 </button>
@@ -71,8 +74,8 @@ const CartPage = () => {
         </div>
 
         {/* Order Summary */}
-        <div className="md:col-span-1">
-          <div className="bg-white p-6 border border-gray-200 rounded-lg shadow-sm">
+        <div className="lg:col-span-1">
+          <div className="bg-white p-6 border border-gray-200 rounded-lg shadow-sm sticky top-24">
             <h2 className="text-xl font-bold mb-4">Order Summary</h2>
             <div className="space-y-2">
               <div className="flex justify-between">
@@ -81,7 +84,7 @@ const CartPage = () => {
               </div>
               <div className="flex justify-between">
                 <span>Delivery Fee</span>
-                <span>FREE</span>
+                <span className="font-semibold text-green-600">FREE</span>
               </div>
             </div>
             <div className="border-t border-gray-200 mt-4 pt-4">

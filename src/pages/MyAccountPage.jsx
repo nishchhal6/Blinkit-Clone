@@ -1,30 +1,27 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSearchParams } from "react-router-dom";
 import AccountSidebar from "../components/ui/AccountSidebar";
 
-// Apne sabhi section components ko yahan import karein
+// Import your section components
 import MyAddresses from "./MyAddresses";
 import MyOrders from "./MyOrders";
 import EGiftCards from "./EGiftCards";
 import AccountPrivacy from "./AccountPrivacy";
 
-// FAQs ke liye ek dummy component
+// Dummy component for FAQs
 const FAQs = () => (
   <div>
     <h2 className="text-2xl font-bold text-gray-800 mb-4">
       Frequently Asked Questions
     </h2>
-    <p className="text-gray-500">Yahan FAQs dikhaye jayenge.</p>
+    <p className="text-gray-500">FAQ content will be displayed here.</p>
   </div>
 );
 
 const MyAccountPage = () => {
   const [searchParams] = useSearchParams();
-
-  // URL se `section` parameter nikalo. Agar nahi hai, to 'addresses' ko default maano.
   const activeTab = searchParams.get("section") || "addresses";
 
-  // Sahi content dikhane ke liye function
   const renderContent = () => {
     switch (activeTab) {
       case "orders":
@@ -38,19 +35,18 @@ const MyAccountPage = () => {
       case "faqs":
         return <FAQs />;
       default:
-        // Agar URL mein koi anjaan section hai, to addresses dikhao
         return <MyAddresses />;
     }
   };
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <div className="max-w-7xl mx-auto flex">
-        {/* Sidebar ko activeTab pass karo taki sahi item highlight ho */}
+      {/* Responsive Change: Added flex-col and md:flex-row */}
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-8 p-4 md:p-8">
         <AccountSidebar activeTab={activeTab} />
-
-        {/* Right side mein content dikhao */}
-        <div className="flex-1 p-8">{renderContent()}</div>
+        <div className="flex-1 bg-white p-6 rounded-xl shadow-sm">
+          {renderContent()}
+        </div>
       </div>
     </div>
   );
